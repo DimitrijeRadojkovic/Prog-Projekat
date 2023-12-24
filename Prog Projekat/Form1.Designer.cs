@@ -40,10 +40,21 @@
             this.profil = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
+            this.kategorija = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.naziv = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cena = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.dodajSlike = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // prijavaButton
@@ -145,6 +156,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.panel2);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.kategorija);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Location = new System.Drawing.Point(4, 23);
             this.tabPage3.Name = "tabPage3";
@@ -162,6 +176,100 @@
             this.label2.Size = new System.Drawing.Size(493, 32);
             this.label2.TabIndex = 0;
             this.label2.Text = "Morate se prijaviti da biste dodali oglas!";
+            // 
+            // kategorija
+            // 
+            this.kategorija.FormattingEnabled = true;
+            this.kategorija.Items.AddRange(new object[] {
+            "Automobili",
+            "Racunari i oprema",
+            "Drugo"});
+            this.kategorija.Location = new System.Drawing.Point(345, 163);
+            this.kategorija.Name = "kategorija";
+            this.kategorija.Size = new System.Drawing.Size(121, 22);
+            this.kategorija.TabIndex = 1;
+            this.kategorija.Visible = false;
+            this.kategorija.SelectedIndexChanged += new System.EventHandler(this.kategorija_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 10.25F);
+            this.label3.Location = new System.Drawing.Point(342, 132);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Izaberite kategoriju";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dodajSlike);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.cena);
+            this.panel2.Controls.Add(this.naziv);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Location = new System.Drawing.Point(10, 15);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(773, 349);
+            this.panel2.TabIndex = 3;
+            this.panel2.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 14);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Naziv oglasa";
+            // 
+            // naziv
+            // 
+            this.naziv.Location = new System.Drawing.Point(18, 57);
+            this.naziv.Name = "naziv";
+            this.naziv.Size = new System.Drawing.Size(134, 20);
+            this.naziv.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 117);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(134, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // cena
+            // 
+            this.cena.AutoSize = true;
+            this.cena.Location = new System.Drawing.Point(15, 87);
+            this.cena.Name = "cena";
+            this.cena.Size = new System.Drawing.Size(32, 14);
+            this.cena.TabIndex = 2;
+            this.cena.Text = "Cena";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 153);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 14);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Slike";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Multiselect = true;
+            // 
+            // dodajSlike
+            // 
+            this.dodajSlike.Location = new System.Drawing.Point(18, 183);
+            this.dodajSlike.Name = "dodajSlike";
+            this.dodajSlike.Size = new System.Drawing.Size(75, 23);
+            this.dodajSlike.TabIndex = 5;
+            this.dodajSlike.Text = "Dodaj slike";
+            this.dodajSlike.UseVisualStyleBackColor = true;
+            this.dodajSlike.Click += new System.EventHandler(this.dodajSlike_Click);
             // 
             // Form1
             // 
@@ -185,6 +293,8 @@
             this.panel1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +313,16 @@
         private System.Windows.Forms.Button profil;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox kategorija;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox naziv;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label cena;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button dodajSlike;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

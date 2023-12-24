@@ -61,8 +61,13 @@ namespace Prog_Projekat
         {
             try
             {
-                var korisnik = korisnici.Find(Builders<Korisnik>.Filter.Eq("Email", email)).ToList();
-                return new Korisnik(korisnik[0].Ime, korisnik[0].Prezime, korisnik[0].Email, korisnik[0].Lozinka, korisnik[0].DatumRegistracije, korisnik[0].DatumPrijave, korisnik[0].Oglasi);
+                if (korisnici.CountDocuments(Builders<Korisnik>.Filter.Empty) > 0)
+                {
+                    var korisnik = korisnici.Find(Builders<Korisnik>.Filter.Eq("Email", email)).ToList();
+                    return new Korisnik(korisnik[0].Ime, korisnik[0].Prezime, korisnik[0].Email, korisnik[0].Lozinka, korisnik[0].DatumRegistracije, korisnik[0].DatumPrijave, korisnik[0].Oglasi);
+                }
+                else
+                    return null;
             }
             catch(Exception e )
             {
@@ -74,7 +79,8 @@ namespace Prog_Projekat
         {
             try
             {
-                korisnici.FindOneAndUpdate(Builders<Korisnik>.Filter.Eq("Email", email), Builders<Korisnik>.Update.Set(t => t.DatumPrijave, DateTime.Now));
+                
+                    korisnici.FindOneAndUpdate(Builders<Korisnik>.Filter.Eq("Email", email), Builders<Korisnik>.Update.Set(t => t.DatumPrijave, DateTime.Now));
             }
             catch(Exception e)
             {

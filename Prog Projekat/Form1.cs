@@ -85,11 +85,15 @@ namespace Prog_Projekat
             {
                 if (k.Ime != null)
                 {
-                    label2.Text = String.Empty;
+                    label2.Hide();
+                    kategorija.Show();
+                    label3.Show();
                 }
                 else
                 {
-                    prijavaButton_Click(sender , e);
+                    prijavaButton_Click(sender, e);
+                    kategorija.Hide();
+                    label3.Hide();
                 }
             }
         }
@@ -98,6 +102,18 @@ namespace Prog_Projekat
         {
             tabControl1.Width = this.ClientSize.Width;
             tabControl1.Height = this.ClientSize.Height;
+        }
+
+        private void kategorija_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            kategorija.Hide();
+            label3.Hide();
+            panel2.Show();
+        }
+
+        private void dodajSlike_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
         }
     }
     
