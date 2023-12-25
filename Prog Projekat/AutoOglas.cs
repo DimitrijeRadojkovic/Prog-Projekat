@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Prog_Projekat
 {
+    [BsonIgnoreExtraElements]
     internal class AutoOglas : Oglas
     {
         private string marka, model, gorivo, karoserija;
@@ -86,7 +89,7 @@ namespace Prog_Projekat
             }
         }
         public AutoOglas() { }
-        public AutoOglas(string naziv, string email_korisnika, int cena, int broj_lajkova, DateTime datum_objave, List<byte[]> slike, List<Korisnik> pregledi, string marka, string model, string gorivo, string karoserija, int godiste, int kilometraza, int kubikaza, int snaga):base(naziv, email_korisnika, cena, broj_lajkova, datum_objave, slike, pregledi)
+        public AutoOglas(string naziv, string email_korisnika, int cena, Hashtable lajkovi, DateTime datum_objave, List<byte[]> slike, List<Korisnik> pregledi, string marka, string model, string gorivo, string karoserija, int godiste, int kilometraza, int kubikaza, int snaga):base(naziv, email_korisnika, cena, lajkovi, datum_objave, slike, pregledi)
         {
             this.marka = marka;
             this.model = model;
@@ -96,6 +99,18 @@ namespace Prog_Projekat
             Kilometraza = kilometraza;
             Kubikaza = kubikaza;
             Snaga = snaga;
+        }
+        public AutoOglas(AutoOglas other)
+            : base(other.Naziv, other.Email_korisnika, other.Cena, other.Lajkovi, other.Datum_objave, other.Slike, other.Pregledi)
+        {
+            this.marka = other.marka;
+            this.model = other.model;
+            this.gorivo = other.gorivo;
+            this.karoserija = other.karoserija;
+            this.godiste = other.godiste;
+            this.kilometraza = other.kilometraza;
+            this.kubikaza = other.kubikaza;
+            this.snaga = other.snaga;
         }
         public AutoOglas(string marka)
         {

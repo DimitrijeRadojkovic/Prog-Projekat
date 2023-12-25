@@ -17,6 +17,7 @@ namespace Prog_Projekat
         private string ime, prezime, email, lozinka;
         private DateTime datum_registracije, datum_prijave;
         private List<Oglas> oglasi = new List<Oglas>();
+        private List<Oglas> sacuvaniOglasi = new List<Oglas>();
         public string Ime
         {
             get { return ime; }
@@ -67,8 +68,16 @@ namespace Prog_Projekat
             get { return oglasi; }
             set { oglasi = value; }
         }
-        public Korisnik() { }
-        public Korisnik(string ime, string prezime, string email, string lozinka, DateTime datum_registracije, DateTime datum_prijave, List<Oglas> oglasi)
+        public List<Oglas> SacuvaniOglasi
+        {
+            get { return sacuvaniOglasi; }
+            set { sacuvaniOglasi = value;}
+        }
+        public Korisnik()
+        {
+            this.email = String.Empty;
+        }
+        public Korisnik(string ime, string prezime, string email, string lozinka, DateTime datum_registracije, DateTime datum_prijave, List<Oglas> oglasi, List<Oglas> sacuvaniOglasi)
         {
             this.ime = ime;
             this.prezime = prezime;
@@ -77,6 +86,18 @@ namespace Prog_Projekat
             this.datum_registracije = datum_registracije;
             this.datum_prijave = datum_prijave;
             this.oglasi = oglasi;
+            this.sacuvaniOglasi = sacuvaniOglasi;
+        }
+        public Korisnik(Korisnik a)
+        {
+            this.ime = a.ime;
+            this.prezime= a.prezime;
+            this.email = a.Email;
+            this.lozinka= a.lozinka;
+            this.datum_registracije= a.datum_registracije;
+            this.datum_prijave= a.datum_prijave;
+            this.oglasi= a.oglasi;
+            this.sacuvaniOglasi = a.sacuvaniOglasi;
         }
         public Korisnik(StreamReader sr)
         {

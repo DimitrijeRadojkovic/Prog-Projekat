@@ -35,7 +35,7 @@ namespace Prog_Projekat
         {
             try
             {
-                Korisnik k = new Korisnik(ime.Text, prezime.Text, email.Text, lozinka.Text, DateTime.Now, DateTime.Now, null);
+                Korisnik k = new Korisnik(ime.Text, prezime.Text, email.Text, lozinka.Text, DateTime.Now, DateTime.Now, new List<Oglas>(), new List<Oglas>());
                 Baza.UpisiKorisnika(k);
                 StreamWriter sw = new StreamWriter("cookies.txt", false);
                 sw.WriteLine(k.ToString());

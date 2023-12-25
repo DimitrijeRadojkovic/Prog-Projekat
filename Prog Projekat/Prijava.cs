@@ -54,7 +54,7 @@ namespace Prog_Projekat
                     Prezime = k.Prezime;
                     Email = k.Email;
                     k.DatumPrijave = DateTime.Now;
-                    Baza.updateDatumPrijave(k.Email);
+                    k = Baza.UpdateKorisnik(k);
                     StreamWriter sw = new StreamWriter("cookies.txt", false);
                     sw.WriteLine(k.ToString());
                     sw.Close();

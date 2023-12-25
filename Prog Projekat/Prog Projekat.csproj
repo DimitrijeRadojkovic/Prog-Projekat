@@ -122,6 +122,12 @@
     </Compile>
     <Compile Include="Korisnik.cs" />
     <Compile Include="Oglas.cs" />
+    <Compile Include="AutoOglasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoOglasForm.Designer.cs">
+      <DependentUpon>AutoOglasForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prijava.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     <Compile Include="Registracija.Designer.cs">
       <DependentUpon>Registracija.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AutoOglasForm.resx">
+      <DependentUpon>AutoOglasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
