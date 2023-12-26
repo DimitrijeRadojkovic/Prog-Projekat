@@ -122,8 +122,8 @@ namespace Prog_Projekat
             else if(tabControl1.SelectedTab.Text == "Pocetna")
             {
                 sviOglasi = Baza.PokupiOglase();
-                
-                if (sviOglasi != null && sviOglasi.Count > 0 && k.Ime != null)
+                MessageBox.Show(k.ToString());
+                if (sviOglasi != null && sviOglasi.Count > 0 && k.Ime != "")
                 {
                     foreach(Oglas o in sviOglasi)
                     {
@@ -157,7 +157,14 @@ namespace Prog_Projekat
                         l2.Hide();
 
                         Label l3 = new Label();
-                        l3.Text = ((bool)o.Lajkovi[k.Email]) ? "Ukloni iz sacuvanih" : "Sacuvaj oglas";
+                        if (o.Lajkovi.ContainsKey(k.Email))
+                        {
+                            l3.Text = ((bool)o.Lajkovi[k.Email]) ? "Ukloni iz sacuvanih" : "Sacuvaj oglas";
+                        }
+                        else
+                        {
+                            l3.Text = "Sacuvaj oglas";
+                        }
                         l3.Location = new Point(580, 40);
 
                         Button like = new Button();
@@ -172,15 +179,23 @@ namespace Prog_Projekat
                         MessageBox.Show("ovo su korisnici.sacuvaniOglasi " + k.SacuvaniOglasi.Count);
 
                         //OVDE JE PROBLEM
-                        if ((bool)o.Lajkovi[k.Email])
+                        if (o.Lajkovi.ContainsKey(k.Email))
                         {
-                            like.BackColor = Color.Red;
-                            like.Click += (s, eventArgs) => updateLike(s, eventArgs,  o, false, like);
+                            if ((bool)o.Lajkovi[k.Email])
+                            {
+                                like.BackColor = Color.Red;
+                                like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, false, like);
+                            }
+                            else
+                            {
+                                like.BackColor = Color.White;
+                                like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, true, like);
+                            }
                         }
                         else
                         {
                             like.BackColor = Color.White;
-                            like.Click += (s, eventArgs) => updateLike(s, eventArgs,  o, true, like);
+                            like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, true, like);
                         }
 
                         Button b = new Button();
