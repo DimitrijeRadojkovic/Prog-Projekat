@@ -19,10 +19,9 @@ namespace Prog_Projekat
         public string Id { get; set; }
         private string naziv, email_korisnika;
         private int cena;
-        private Hashtable lajkovi = new Hashtable();
+        private List<Korisnik> lajkovi = new List<Korisnik>();
         private DateTime datum_objave;
         private List<byte[]> slike = new List<byte[]>();
-        private List<Korisnik> pregledi = new List<Korisnik>();
         public string Naziv
         {
             get { return naziv; }
@@ -33,7 +32,7 @@ namespace Prog_Projekat
             get { return email_korisnika;}
             set { email_korisnika = value;}
         }
-        public Hashtable Lajkovi
+        public List<Korisnik> Lajkovi
         {
             get { return lajkovi; }
             set
@@ -62,13 +61,8 @@ namespace Prog_Projekat
             get { return slike; }
             set { slike = value; }
         }
-        public List<Korisnik> Pregledi
-        {
-            get { return pregledi; }
-            set { pregledi = value; }
-        }
         public Oglas() { }
-        public Oglas(string naziv, string email_korisnika, int cena, Hashtable lajkovi, DateTime datum_objave, List<byte[]> slike, List<Korisnik> pregledi)
+        public Oglas(string naziv, string email_korisnika, int cena, List<Korisnik> lajkovi, DateTime datum_objave, List<byte[]> slike)
         {
             Naziv = naziv;
             Email_korisnika = email_korisnika;
@@ -76,7 +70,10 @@ namespace Prog_Projekat
             Lajkovi = lajkovi;
             Datum_objave = datum_objave;
             Slike = slike;
-            Pregledi = pregledi;
+        }
+        public Oglas(Oglas a)
+        {
+             
         }
         abstract public void upisUBazu();
 

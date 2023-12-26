@@ -19,7 +19,7 @@ namespace Prog_Projekat
         {
             try
             {
-                client = new MongoClient("mongodb+srv://dimitrijeradojkovic8:SuperTajnaSifra@cluster0.cysxt7x.mongodb.net/?retryWrites=true&w=majority");
+                client = new MongoClient("mongodb+srv://dimitrijeradojkovic8:SuperTajnaSifra@cluster0.w38u8xv.mongodb.net/?retryWrites=true&w=majority");
                 string imeBaze = "OglasiKupovinaProdaja";
                 string imeTabele = "oglasi";
                 oglasi = client.GetDatabase(imeBaze).GetCollection<Oglas>(imeTabele);
@@ -91,7 +91,7 @@ namespace Prog_Projekat
                     if (oglasi1.Count > 0)
                     {
                         var oglas = (AutoOglas)oglasi1[0];
-                        return new AutoOglas(oglas.Naziv, oglas.Email_korisnika, oglas.Cena, oglas.Lajkovi, oglas.Datum_objave, oglas.Slike, oglas.Pregledi, oglas.Marka, oglas.Model, oglas.Gorivo, oglas.Karoserija, oglas.Godiste, oglas.Kilometraza, oglas.Kubikaza, oglas.Snaga);
+                        return new AutoOglas(oglas.Naziv, oglas.Email_korisnika, oglas.Cena, oglas.Lajkovi, oglas.Datum_objave, oglas.Slike, oglas.Marka, oglas.Model, oglas.Gorivo, oglas.Karoserija, oglas.Godiste, oglas.Kilometraza, oglas.Kubikaza, oglas.Snaga);
                     }
                         
                     else

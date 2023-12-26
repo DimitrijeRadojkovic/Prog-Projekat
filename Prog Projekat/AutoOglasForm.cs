@@ -28,7 +28,6 @@ namespace Prog_Projekat
         {
             oglas = Baza.PronadjiOglas(Id);
             slika.Location = new Point(30, 25);
-            slika.Size = new Size(200, 100);
             slika.SizeMode = PictureBoxSizeMode.Zoom;
             slika.Image = BajtoviUSliku(oglas.Slike[0]);
 

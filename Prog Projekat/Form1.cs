@@ -77,7 +77,6 @@ namespace Prog_Projekat
         {
             Baza.Povezivanje();
             k = new Korisnik(ProveriCookies(k, prijavaLabel, prijavaButton, profil, ClientSize.Width));
-            sviOglasi = Baza.PokupiOglase();
             tabControl1.SelectedTab = tabPage2;
             tabControl1.SelectedTab = tabPage1;
         }
@@ -121,100 +120,87 @@ namespace Prog_Projekat
             }
             else if(tabControl1.SelectedTab.Text == "Pocetna")
             {
-                sviOglasi = Baza.PokupiOglase();
-                MessageBox.Show(k.ToString());
-                if (sviOglasi != null && sviOglasi.Count > 0 && k.Ime != "")
+                if(Baza.PokupiOglase() != null)
                 {
-                    foreach(Oglas o in sviOglasi)
+                    sviOglasi = new List<Oglas>(Baza.PokupiOglase());
+                    int visina = 25;
+                    if (sviOglasi != null && sviOglasi.Count > 0 && k.Ime != "")
                     {
-                        int br = 0;
-                        //MessageBox.Show("ovo je iz svih oglasa " + o.Lajkovi[k.Email].ToString());
-
-                        Panel p = new Panel();
-                        p.Width = ClientSize.Width;
-                        p.Height = 150;
-
-                        PictureBox pb = new PictureBox();
-                        pb.Location = new Point(30, 25);
-                        pb.Size = new Size(200, 100);
-                        pb.SizeMode = PictureBoxSizeMode.Zoom;
-                        pb.Image = BajtoviUSliku(o.Slike[0]);
-
-                        Label l = new Label();
-                        l.Text = o.Naziv;
-                        l.Location = new Point(250, 70);
-                        l.Size = new Size(200, 100);
-                        l.Font = new Font("Arial", 12, FontStyle.Bold);
-
-                        Label l1 = new Label();
-                        l1.Text = o.Cena.ToString() + " €";
-                        l1.Location = new Point(500, 70);
-                        l1.Size = new Size(100, 100);
-                        l1.Font = new Font("Arial", 12, FontStyle.Bold);
-
-                        Label l2 = new Label();
-                        l2.Text = o.Id;
-                        l2.Hide();
-
-                        Label l3 = new Label();
-                        if (o.Lajkovi.ContainsKey(k.Email))
+                        foreach (Oglas o in sviOglasi)
                         {
-                            l3.Text = ((bool)o.Lajkovi[k.Email]) ? "Ukloni iz sacuvanih" : "Sacuvaj oglas";
-                        }
-                        else
-                        {
-                            l3.Text = "Sacuvaj oglas";
-                        }
-                        l3.Location = new Point(580, 40);
+                            Panel p = new Panel();
+                            PictureBox pb = new PictureBox();
+                            Label l = new Label();
+                            Label l1 = new Label();
+                            Label l2 = new Label();
+                            Label l3 = new Label();
+                            Button like = new Button();
+                            Button b = new Button();
 
-                        Button like = new Button();
-                        like.Location = new Point(600, 60);
-                        like.Size = new Size(30, 30);
-                        foreach (string kljuc in o.Lajkovi.Keys)
-                        {
-                            if ((bool)o.Lajkovi[kljuc] == true)
-                                br++;
-                        }
-                        like.Text = br.ToString();
-                        MessageBox.Show("ovo su korisnici.sacuvaniOglasi " + k.SacuvaniOglasi.Count);
+                            p.Width = ClientSize.Width;
+                            p.Height = 150;
+                            p.Location = new Point(0, 0 + visina);
 
-                        //OVDE JE PROBLEM
-                        if (o.Lajkovi.ContainsKey(k.Email))
-                        {
-                            if ((bool)o.Lajkovi[k.Email])
+
+                            pb.Location = new Point(30, 25);
+                            pb.Size = new Size(200, 100);
+                            pb.SizeMode = PictureBoxSizeMode.Zoom;
+                            pb.Image = BajtoviUSliku(o.Slike[0]);
+
+
+                            l.Text = o.Naziv;
+                            l.Location = new Point(250, 70);
+                            l.Size = new Size(200, 100);
+                            l.Font = new Font("Arial", 12, FontStyle.Bold);
+
+
+                            l1.Text = o.Cena.ToString() + " €";
+                            l1.Location = new Point(500, 70);
+                            l1.Size = new Size(100, 100);
+                            l1.Font = new Font("Arial", 12, FontStyle.Bold);
+
+
+                            l2.Text = o.Id;
+                            l2.Hide();
+
+
+                            if (o.Lajkovi.Contains(k))
                             {
+                                l3.Text = "Ukloni iz sacuvanih";
                                 like.BackColor = Color.Red;
                                 like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, false, like);
                             }
                             else
                             {
+                                l3.Text = "Sacuvaj oglas";
                                 like.BackColor = Color.White;
                                 like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, true, like);
                             }
-                        }
-                        else
-                        {
-                            like.BackColor = Color.White;
-                            like.Click += (s, eventArgs) => updateLike(s, eventArgs, o, true, like);
-                        }
+                            l3.Location = new Point(580, 40);
 
-                        Button b = new Button();
-                        b.Location = new Point(650, 60);
-                        b.Size = new Size(100, 30);
-                        b.Text = "Vidi oglas";
-                        b.Font = new Font("Arial", 12, FontStyle.Bold);
-                        b.Click += (s, eventArgs) => otvoriOglas(o.Id);
 
-                        p.Controls.Add(pb);
-                        p.Controls.Add(l);
-                        p.Controls.Add(l1);
-                        p.Controls.Add(l2);
-                        p.Controls.Add(b);
-                        p.Controls.Add(like);
-                        p.Controls.Add(l3);
-                        tabPage1.Controls.Add(p);
+                            like.Location = new Point(600, 60);
+                            like.Size = new Size(30, 30);
+                            like.Text = (o.Lajkovi.Count).ToString();
+
+                            b.Location = new Point(650, 60);
+                            b.Size = new Size(100, 30);
+                            b.Text = "Vidi oglas";
+                            b.Font = new Font("Arial", 12, FontStyle.Bold);
+                            b.Click += (s, eventArgs) => otvoriOglas(o.Id);
+
+                            p.Controls.Add(pb);
+                            p.Controls.Add(l);
+                            p.Controls.Add(l1);
+                            p.Controls.Add(l2);
+                            p.Controls.Add(b);
+                            p.Controls.Add(like);
+                            p.Controls.Add(l3);
+                            tabPage1.Controls.Add(p);
+                            visina += 120;
+                        }
                     }
-                }
+                }     
             }
         }
 
@@ -278,27 +264,21 @@ namespace Prog_Projekat
             MessageBox.Show("ovo je iz updatelike na pocetku " + k.ToString());
             if(k.Ime != null)
             {
-                o.Lajkovi[k.Email] = res;
-                Baza.updateOglas(o);
-                MessageBox.Show("ovo je nakon promene o " + 
-                o.Lajkovi[k.Email].ToString());
-                int br = 0;
                 if (res)
                 {
+                    o.Lajkovi.Add(k);
+                    Baza.updateOglas(o);
                     k.SacuvaniOglasi.Add(o);
                     k = new Korisnik(Baza.UpdateKorisnik(k));
                 }
                 else
                 {
-                    k.SacuvaniOglasi.RemoveAll(s => s.Id == o.Id);
+                    o.Lajkovi.Remove(k);
+                    Baza.updateOglas(o);
+                    k.SacuvaniOglasi.Remove(o);
                     k = new Korisnik(Baza.UpdateKorisnik(k));
                 }
-                foreach(string kljuc in o.Lajkovi.Keys)
-                {
-                    if ((bool)o.Lajkovi[kljuc] == true)
-                        br++;
-                }
-                b.Text = br.ToString();
+                b.Text = (o.Lajkovi.Count).ToString();
                 tabControl1.SelectedTab = tabPage2;
                 tabControl1.SelectedTab = tabPage1;
             }
@@ -318,15 +298,6 @@ namespace Prog_Projekat
 
             MemoryStream stream = new MemoryStream(byteNiz);
             return Image.FromStream(stream);
-        }
-        public static bool proveriLike(Korisnik k, Oglas o)
-        {
-            if (k != null && o != null)
-            {
-                return o.Lajkovi.ContainsKey(k.Email) && (bool)o.Lajkovi[k.Email];
-            }
-
-            return false;
         }
         public void otvoriOglas(string id)
         {

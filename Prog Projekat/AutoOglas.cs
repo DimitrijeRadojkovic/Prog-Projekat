@@ -89,7 +89,7 @@ namespace Prog_Projekat
             }
         }
         public AutoOglas() { }
-        public AutoOglas(string naziv, string email_korisnika, int cena, Hashtable lajkovi, DateTime datum_objave, List<byte[]> slike, List<Korisnik> pregledi, string marka, string model, string gorivo, string karoserija, int godiste, int kilometraza, int kubikaza, int snaga):base(naziv, email_korisnika, cena, lajkovi, datum_objave, slike, pregledi)
+        public AutoOglas(string naziv, string email_korisnika, int cena, List<Korisnik> lajkovi, DateTime datum_objave, List<byte[]> slike, string marka, string model, string gorivo, string karoserija, int godiste, int kilometraza, int kubikaza, int snaga):base(naziv, email_korisnika, cena, lajkovi, datum_objave, slike)
         {
             this.marka = marka;
             this.model = model;
@@ -101,7 +101,7 @@ namespace Prog_Projekat
             Snaga = snaga;
         }
         public AutoOglas(AutoOglas other)
-            : base(other.Naziv, other.Email_korisnika, other.Cena, other.Lajkovi, other.Datum_objave, other.Slike, other.Pregledi)
+            : base(other.Naziv, other.Email_korisnika, other.Cena, other.Lajkovi, other.Datum_objave, other.Slike)
         {
             this.marka = other.marka;
             this.model = other.model;
